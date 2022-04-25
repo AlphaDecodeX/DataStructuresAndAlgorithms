@@ -1,6 +1,8 @@
-# Data Structures and Algorithms in C++
+# 365 Days Coding Challange
 
-## 1. Chain Implementation to Avoid Collison in Hashing
+## Data Structures and Algorithms in C++ [Copyrighted to AlphaDecodeX]
+
+### Day 1. Chain Implementation to Avoid Collison in Hashing (Open Hashing)
 
 - Linked List Implementation is Used
 - Self Balancing trees like (AVL and Red Black Trees) Could also be used.
@@ -65,6 +67,25 @@ int main()
     return 0;
 }
 
+```
+
+#### Open Hashing or Separate Chaining is
+
+- Not cache friendly
+- Keys can go outside the Hash table
+- Keys can be larger in number than the size of HashTable
+- Deletion is Easier
+- Some buckets would never be used and leads to the wastage of storage
+
+### Day 2. Linear Probing Hashing (Closed Hashing or Open Addressing)
+
+- Keys stored can be atmost the size of hashtable.
+- Caching friendly, No keys stored outside the Table
+- But It results to the Primary clustring 
+
+```CPP
+
 
 
 ```
+
