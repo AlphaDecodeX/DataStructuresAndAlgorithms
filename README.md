@@ -85,6 +85,62 @@ int main()
 
 ```CPP
 
+#include <bits/stdc++.h>
+using namespace std;
+
+struct LinearProbing{
+  int Bucket;
+  vector<int> table;
+  
+  LinearProbing(int size){
+      Bucket = size;
+      fill_n(table.begin(), Becket, -1);
+  }
+  int h(int x, int i){
+      return (x%Bucket + i)%Bucket;
+  }
+  void insert(int key){
+    int index = key%Bucket;
+    if(table[index] && table[index] != -1){ // Not Deleted means element is present
+        int i = 1;
+        while(true){
+            int temp_index = h(key, i);
+            if(index == temp_index){
+                return;
+            }else{
+                if(table[temp_index] == -1 || !table[temp_index]){
+                    table[temp_index] = key;
+                    return;
+                }
+            }
+            i+=1; // Collison Factor
+        }
+    }else if(!table[index] || table[index] == -1){
+        table[index] = key;
+        return;
+    }
+  }
+  void search(int key){
+      
+  }
+  void printHashTable(){
+    for(auto x: table){
+        cout<<x<<" ";
+    }  
+  }
+  
+};
+
+int main()
+{
+    
+    LinearProbing lp(5);
+    lp.insert(5);
+    lp.insert(11);
+    lp.insert(22);
+    lp.printHashTable();
+    return 0;
+}
 
 
 ```
