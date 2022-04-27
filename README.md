@@ -94,14 +94,16 @@ struct LinearProbing{
   
   LinearProbing(int size){
       Bucket = size;
-      fill_n(table.begin(), Becket, -1);
+      for(int index = 0; index<Bucket; index++){
+          table.push_back(-1);
+      }
   }
   int h(int x, int i){
       return (x%Bucket + i)%Bucket;
   }
   void insert(int key){
     int index = key%Bucket;
-    if(table[index] && table[index] != -1){ // Not Deleted means element is present
+    if(table[index] && table[index] != -1){ // Not Deleted/Empty means element is present
         int i = 1;
         while(true){
             int temp_index = h(key, i);
@@ -120,8 +122,30 @@ struct LinearProbing{
         return;
     }
   }
-  void search(int key){
-      
+  int search(int key){
+      if(table[key%Bucket] == key){
+          return key%Bucket;
+      }
+      int i = 1;
+      int start = key%Bucket;
+      while(true){
+          int temp_index = h(key, i);
+          if(table[temp_index] != key && temp_index == start){
+              return -1;
+          }else if(table[temp_index] == key){
+              return temp_index;
+          }else if(table[temp_index]!=key && temp_index != start){
+              i++;
+          }
+      }
+  }
+  void deleteItem(int key){
+      int found_index = search(key);
+      if(found_index == -1){
+          return;
+      }
+      table[found_index] = -1;
+      return;
   }
   void printHashTable(){
     for(auto x: table){
@@ -135,9 +159,16 @@ int main()
 {
     
     LinearProbing lp(5);
-    lp.insert(5);
     lp.insert(11);
     lp.insert(22);
+    lp.insert(32);
+    lp.insert(33);
+    lp.insert(36);
+    lp.printHashTable();
+    cout<<endl;
+    cout<<lp.search(33)<<endl;
+    cout<<lp.search(100)<<endl;
+    lp.deleteItem(11);
     lp.printHashTable();
     return 0;
 }
