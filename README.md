@@ -172,7 +172,108 @@ int main()
     lp.printHashTable();
     return 0;
 }
-
-
 ```
+### Day 3. Quadratic Probing Hashing (Closed Hashing or Open Addressing)
 
+- Clustering Problem is still there
+- But Secondary Clusters which are better than Primary Clusters
+
+```CPP
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <bits/stdc++.h>
+
+using namespace std;
+
+struct QuadProbing{
+    int bucket;
+    vector<int> table;
+    
+    QuadProbing(int size){
+        this->bucket = size;
+        for(int index = 0; index<size;index++){
+            table.push_back(-1);
+        }
+    }
+    int h(int x, int i){
+        return (x%bucket + i*i)%bucket;
+    }
+    void insert(int item){
+        int index = item%bucket;
+        if(table[index] && table[index]!=-1){ // Element is present and not deleted or empty .....
+            int i = 1;
+            while(true){
+                int temp_index = h(item, i);
+                if(temp_index == index){
+                    return;
+                }else if(table[temp_index] == -1){
+                    table[temp_index] = item;
+                }
+                i++; // Collison Factor
+            }
+        }else{
+            table[index] = item;
+        }
+    }int search(int key){
+      if(table[key%bucket] == key){
+          return key%bucket;
+      }
+      int i = 1;
+      int start = key%bucket;
+      while(true){
+          int temp_index = h(key, i);
+          if(table[temp_index] != key && temp_index == start){
+              return -1;
+          }else if(table[temp_index] == key){
+              return temp_index;
+          }else if(table[temp_index]!=key && temp_index != start){
+              i++;
+          }
+      }
+  }
+  void deleteItem(int key){
+      int found_index = search(key);
+      if(found_index == -1){
+          return;
+      }
+      table[found_index] = -1;
+      return;
+  }
+  void printHashTable(){
+    for(auto x: table){
+        cout<<x<<" ";
+    }  
+  }
+  
+};
+
+int main()
+{
+    
+    QuadProbing qp(5);
+    qp.insert(11);
+    qp.insert(22);
+    qp.insert(32);
+    qp.insert(33);
+    qp.insert(36);
+    qp.printHashTable();
+    cout<<endl;
+    cout<<qp.search(33)<<endl;
+    cout<<qp.search(100)<<endl;
+    qp.deleteItem(11);
+    qp.printHashTable();
+    return 0;
+}
+```
+### Day 3. Double Hashing
+
+- It involves less clustering 
+- Contains two hash functions Computations with collison factor as in Linear and Quad. Probing
+- Only hash_function(x, i) needs to be changed as:- 
+- hash(x,i) = (h1(key) + i * h2(key)) % m
