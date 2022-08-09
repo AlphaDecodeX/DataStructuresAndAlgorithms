@@ -277,7 +277,8 @@ int main()
 - hash(x,i) = (h1(key) + i * h2(key)) % m
 
 ### Stack Implementation Using Template Programming
-```
+
+```CPP
 #include <bits/stdc++.h>
 using namespace std;
 #define um unordered_map<int, int>
@@ -364,7 +365,7 @@ int main(){
 
 ### Queue Implementation using Template Programming
 
-```
+```CPP
 #include <bits/stdc++.h>
 using namespace std;
 #define um unordered_map<int, int>
