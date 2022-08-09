@@ -1,8 +1,6 @@
-# 365 Days Coding Challange
-
 ## Data Structures and Algorithms in C++ [Copyrighted to AlphaDecodeX]
 
-### Day 1. Chain Implementation to Avoid Collison in Hashing (Open Hashing)
+### Chain Implementation to Avoid Collison in Hashing (Open Hashing)
 
 - Linked List Implementation is Used
 - Self Balancing trees like (AVL and Red Black Trees) Could also be used.
@@ -77,7 +75,7 @@ int main()
 - Deletion is Easier
 - Some buckets would never be used and leads to the wastage of storage
 
-### Day 2. Linear Probing Hashing (Closed Hashing or Open Addressing)
+### Linear Probing Hashing (Closed Hashing or Open Addressing)
 
 - Keys stored can be atmost the size of hashtable.
 - Caching friendly, No keys stored outside the Table
@@ -173,7 +171,7 @@ int main()
     return 0;
 }
 ```
-### Day 3. Quadratic Probing Hashing (Closed Hashing or Open Addressing)
+### Quadratic Probing Hashing (Closed Hashing or Open Addressing)
 
 - Clustering Problem is still there
 - But Secondary Clusters which are better than Primary Clusters
@@ -271,9 +269,176 @@ int main()
     return 0;
 }
 ```
-### Day 3. Double Hashing
+### Double Hashing
 
 - It involves less clustering 
 - Contains two hash functions Computations with collison factor as in Linear and Quad. Probing
 - Only hash_function(x, i) needs to be changed as:- 
 - hash(x,i) = (h1(key) + i * h2(key)) % m
+
+### Stack Implementation Using Template Programming
+```
+#include <bits/stdc++.h>
+using namespace std;
+#define um unordered_map<int, int>
+#define vc vector<int>
+#define dvc vector<vector<int>>
+#define ll long long int
+#define mod 1000000007
+#define rep(i,a,b) for(int i=a;i<b;i++)
+#define rev(i,a,b) for(int i=a;i>=b;i--)
+#define arr(a,n) rep(i,0,n) cin>>a[i] 
+#define pii pair<int,int>
+#define pb push_back
+
+template <class T> class Stack{
+	private:
+		vector<T> _stack;
+		int size = 1e5;
+	public:
+		void push(T item){
+			if(_stack.size()>size){
+				cout<<"Stack is overflow"<<endl;
+			}else{
+				_stack.push_back(item);
+			}
+		}
+		void pop(){
+			if(_stack.size()==0){
+				cout<<"Stack is underflow"<<endl;
+			}else{
+				_stack.pop_back();
+			}
+		}
+		T top(){
+			if(_stack.size()==0){
+				return NULL;
+			}else{
+				return _stack[_stack.size()-1];
+			}
+		}
+		void print(){
+			for (int i = 0; i < _stack.size(); ++i)
+			{	
+				cout<<_stack[i]<<' ';
+			}
+			cout<<endl;
+			return;
+		}
+
+};
+
+
+int main(){
+	
+	#ifndef ONLINE_JUDGE
+		freopen("input.txt", "r", stdin);
+		freopen("output.txt", "w", stdout);
+	#endif
+	
+	Stack<int> s1;
+	s1.push(1);
+	s1.push(2);
+	s1.push(3);
+	s1.push(3);
+	s1.push(5);
+	s1.pop();
+	s1.print();
+	s1.pop();
+	s1.print();
+	
+	Stack<char> s2;
+	s2.push('a');
+	s2.push('b');
+	s2.push('c');
+	s2.push('d');
+	s2.push('e');
+	s2.pop();
+	s2.print();
+	s2.pop();
+	s2.print();
+	
+	return 0;
+}
+```
+
+### Queue Implementation using Template Programming
+
+```
+#include <bits/stdc++.h>
+using namespace std;
+#define um unordered_map<int, int>
+#define vc vector<int>
+#define dvc vector<vector<int>>
+#define ll long long int
+#define mod 1000000007
+#define rep(i,a,b) for(int i=a;i<b;i++)
+#define rev(i,a,b) for(int i=a;i>=b;i--)
+#define arr(a,n) rep(i,0,n) cin>>a[i] 
+#define pii pair<int,int>
+#define pb push_back
+
+
+template <class T> class Queue{
+	private:
+		vector<T> _queue;
+		int size = 1e5;
+	public:
+		Queue(){}
+
+		void enqueue(T item){
+			if(_queue.size()>size){
+				cout<<"Queue Overflow"<<endl;
+			}else{
+				_queue.push_back(item);
+			}
+			return;
+		}
+		void dequeue(){
+			if(_queue.size()==0){
+				cout<<"Queue Underflow"<<endl;
+			}else{
+				_queue.erase(_queue.begin());
+			}
+		}
+		T front(){
+			if(_queue.size()==0){
+				cout<<"Empty"<<endl;
+			}else{
+				return _queue[0];
+			}
+		}
+		void print(){
+			for (int i = 0; i < _queue.size(); ++i)
+			{
+				cout<<_queue[i]<<' ';
+			}
+			cout<<endl;
+			return;
+		}
+
+};
+
+
+
+int main(){
+	
+	#ifndef ONLINE_JUDGE
+		freopen("input.txt", "r", stdin);
+		freopen("output.txt", "w", stdout);
+	#endif
+
+	Queue<int> q1;
+	q1.front();
+	q1.enqueue(1);
+	q1.enqueue(2);
+	q1.enqueue(3);
+	q1.enqueue(4);
+	q1.print();
+	q1.dequeue();
+	q1.print();
+
+	return 0;
+}
+
+```
